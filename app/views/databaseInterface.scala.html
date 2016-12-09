@@ -1,0 +1,37 @@
+@(message: String, result: List[List[String]], query: String)
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @* Here's where we render the page title `String`. *@
+        <title>@message</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <script src="@routes.Assets.versioned("javascripts/database.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        <p>hello world</p>
+        <p>Database interface<br />
+            <textarea style="margin: 0px; height: 193px; width: 533px;" cols="40" name="comment" id="query" rows="3">@query</textarea>
+        </p>
+        <p>
+                <input type="submit" value="Execute" onclick="javascript:window.location.href='/database/' + document.getElementById('query').value" />
+        </p>
+        @if(result.size >= 1 ) {
+            <table border="1">
+                <tbody>
+            @for(list <- result) {
+                <tr>
+                @for(entry <- list) {
+                    <td>@entry</td>
+                }
+                </tr>
+            }
+                </tbody>
+            </table>
+        } else {
+            <p>No rows returned!</p>
+        }
+    </body>
+</html>
